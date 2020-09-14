@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/red"
+    tools:context=".activity.Confirm_Activity">
+
+    <ImageView
+        android:id="@+id/imgConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_confirm" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgConfirm"
+        android:gravity="center"
+        android:text="@string/your_order_has_been_successfully_placed"
+        android:textColor="#fff"
+        android:textSize="20sp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="4dp">
+
+        <Button
+            android:id="@+id/btnOk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@color/colorPrimaryDark"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:text="@string/ok"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

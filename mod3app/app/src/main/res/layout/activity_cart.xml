@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.CartActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/carttoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="@color/white" />
+
+    <TextView
+        android:id="@+id/txtOrderingFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/carttoolbar"
+        android:padding="10dp"
+        android:text="@string/ordering_from"
+        android:textColor="#000"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txtResName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/carttoolbar"
+        android:layout_toRightOf="@+id/txtOrderingFrom"
+        android:padding="10dp"
+        android:text="resaturant_name"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerOrders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtOrderingFrom"
+        android:layout_margin="5dp"
+        android:padding="10dp" />
+
+
+    <Button
+        android:id="@+id/btnPlaceOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:padding="15dp"
+        android:text="Place order"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="20sp" />
+
+
+</RelativeLayout>

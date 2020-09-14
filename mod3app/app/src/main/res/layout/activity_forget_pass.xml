@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/red"
+    tools:context=".activity.ForgetPassActivity">
+
+    <ImageView
+        android:id="@+id/applogo"
+        android:layout_width="match_parent"
+        android:layout_height="182dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/applogo"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/txtEnterMobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/applogo"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:text="Enter your registered mobile and email address"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
+
+    <EditText
+        android:id="@+id/mobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtEnterMobile"
+        android:layout_gravity="center_horizontal"
+        android:drawableLeft="@drawable/ic_phone"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:background="#fff"
+        android:hint="MOBILE NUMBER(10)"
+        android:inputType="phone"
+        android:maxLength="10"
+        android:maxLines="1"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:drawableLeft="@drawable/ic_email"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mobile"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#fff"
+        android:hint="EMAIL ADDRESS"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email"
+        android:layout_marginTop="40dp"
+        android:background="#DF0101"
+        android:text="NEXT"
+        android:textColor="#fff"
+        android:textSize="20sp" />
+
+</RelativeLayout>

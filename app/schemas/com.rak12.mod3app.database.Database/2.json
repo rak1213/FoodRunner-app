@@ -1,0 +1,96 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "8b7b07a63609f71359c1fc4f60d811e5",
+    "entities": [
+      {
+        "tableName": "restaurant",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `rating` TEXT NOT NULL, `cost_for_one` TEXT NOT NULL, `image_url` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rating",
+            "columnName": "rating",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cost_for_one",
+            "columnName": "cost_for_one",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "image_url",
+            "columnName": "image_url",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "cartorder",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`foodid` TEXT NOT NULL, `resid` INTEGER NOT NULL, `foodname` TEXT NOT NULL, `price` TEXT NOT NULL, PRIMARY KEY(`foodid`))",
+        "fields": [
+          {
+            "fieldPath": "foodid",
+            "columnName": "foodid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "resid",
+            "columnName": "resid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "foodname",
+            "columnName": "foodname",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "price",
+            "columnName": "price",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "foodid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8b7b07a63609f71359c1fc4f60d811e5')"
+    ]
+  }
+}

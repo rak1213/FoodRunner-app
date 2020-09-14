@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Food Runner</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="opendrawer">Open Drawer</string>
+    <string name="closedrawer">Closed Drawer</string>
+
+    <string name="preference_file">Restaurant_Preference</string>
+    <string name="passworderror">Enter Some Password</string>
+    <string name="mobilerror">Enter Valid Mobile Number</string>
+    <string name="q1">Why this App?</string>
+    <string name="a1">In this busy world People don\'t have time to go to restaurants and eat. Therefore, having an app as great as this makes yor life easier and tasty.</string>
+    <string name="q2">How many restaurants do you have?</string>
+    <string name="a2">We cover a large variety of restaurants located at your city and deliver delicious food at your doorsteps</string>
+    <string name="q3">Would my payment details secure on this app?</string>
+    <string name="a3">Your details are protected by google\'s Alpha security and hence cannot be breached. Thus, its a good reason to trust the app and its backend work.</string>
+    <string name="q4">Is Cash on delivery available?</string>
+    <string name="a4">We provide a bunch of payment options which does include Cash on dekivery and we are more happy to deliver food at your doorsteps and don\'t forget your satisfaction is our top priority.</string>
+    <string name="ordering_from">Ordering From :</string>
+    <string name="your_order_has_been_successfully_placed">Your order has been successfully placed</string>
+    <string name="ok">OK</string>
+    <string name="your_favourites_list_is_empty">YOUR FAVOURITES LIST IS EMPTY</string>
+    <string name="previous_orders">PREVIOUS ORDERS :-</string>
+    <string name="no_orders_currently">NO ORDERS CURRENTLY</string>
+    <string name="q5">How Quick or Adequate Was the Speed of Service?</string>
+    <string name="a5">Nobody wants to wait an unreasonably long time for their food in a restaurant, particularly if it’s at a fast food restaurant. In fact, speed of service makes a huge impact on customer retention rates.</string>
+    <array name="filters">
+        <item>Cost(Low to High)</item>
+        <item>Cost(High to Low)</item>
+        <item>Rating</item>
+    </array>
+</resources>

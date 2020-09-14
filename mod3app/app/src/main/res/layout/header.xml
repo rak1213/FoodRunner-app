@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="270dp"
+    android:background="@color/red">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="125dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:padding="5dp"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/applogo" />
+
+    <TextView
+        android:id="@+id/tx1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="FOOD RUNNER"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tx1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        android:text="NAVIGATION DRAWER"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
