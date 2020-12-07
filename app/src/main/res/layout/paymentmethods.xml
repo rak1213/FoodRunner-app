@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="PAYMENT METHODS"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+  <ImageView
+      android:id="@+id/cod"
+      android:layout_width="wrap_content"
+      android:layout_height="110dp"
+      android:src="@drawable/cod"
+      android:layout_below="@+id/textView"
+      android:layout_marginLeft="20dp"
+      android:layout_marginTop="20dp"
+      android:padding="5dp"/>
+    <ImageView
+        android:id="@+id/gpay"
+
+        android:layout_width="wrap_content"
+        android:layout_height="110dp"
+        android:src="@drawable/gpay"
+        android:layout_below="@+id/cod"
+
+        android:layout_marginTop="20dp"
+        />
+    </RelativeLayout>

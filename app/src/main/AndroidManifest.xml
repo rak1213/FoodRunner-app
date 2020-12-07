@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,14 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".activity.Confirm_Activity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.CartActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait" />
+
+            />
         <activity
             android:name=".activity.RestaurantDetails"
             android:configChanges="orientation|screenSize|keyboardHidden"
@@ -56,6 +58,9 @@
             android:name=".activity.LoginActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_test_Ut3tCh33xL8kl3" />
     </application>
 
 </manifest>

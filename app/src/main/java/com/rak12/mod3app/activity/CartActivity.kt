@@ -1,5 +1,6 @@
 package com.rak12.mod3app.activity
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -12,6 +13,10 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import android.app.AlertDialog
+import android.app.Dialog
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,12 +33,17 @@ import com.rak12.mod3app.database.CartEntity
 import com.rak12.mod3app.database.Database
 import com.rak12.mod3app.database.MIGRATION_1_2
 import com.rak12.mod3app.util.ConnectionManager
+import com.razorpay.Checkout
+import com.razorpay.PaymentResultListener
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.nio.channels.AsynchronousFileChannel.open
+import java.nio.channels.FileChannel.open
 
 
-class CartActivity : AppCompatActivity() {
+class CartActivity : AppCompatActivity() , PaymentResultListener {
+    val TAG:String = CartActivity::class.toString()
     lateinit var layoutManager: RecyclerView.LayoutManager
     lateinit var recyclerOrders: RecyclerView
     lateinit var toolbar: Toolbar
@@ -41,14 +51,20 @@ class CartActivity : AppCompatActivity() {
     lateinit var sp: SharedPreferences
     lateinit var btnPlaceOrder: Button
     lateinit var txtResName: TextView
+    lateinit var paymentdialog:Dialog
+    lateinit var  cod:ImageView
+    lateinit var gpay:ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
+        Checkout.preload(applicationContext)
+
         toolbar = findViewById(R.id.carttoolbar)
         sp = getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE)
         setuptoolbar()
         title = "My Cart"
+
         btnPlaceOrder = findViewById(R.id.btnPlaceOrder)
         var j = 0
         var display = listOf<CartEntity>()
@@ -86,6 +102,15 @@ class CartActivity : AppCompatActivity() {
         if (ConnectionManager().checkconnectivity(this)) {
             btnPlaceOrder.setOnClickListener {
 
+                paymentdialog= Dialog(this)
+                paymentdialog.setContentView(R.layout.paymentmethods)
+                paymentdialog.setCancelable(true)
+                paymentdialog.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+                paymentdialog.create()
+                paymentdialog.show()
+                cod=paymentdialog.findViewById(R.id.cod)
+                gpay=paymentdialog.findViewById(R.id.gpay)
+                cod.setOnClickListener {
                 val jsonObjectRequest =
                     object :
                         JsonObjectRequest(Request.Method.POST, url, jsonParams, Response.Listener {
@@ -95,9 +120,12 @@ class CartActivity : AppCompatActivity() {
 
                                 if (success) {
 
-                                    val intent = Intent(this, Confirm_Activity::class.java)
+
+                                        val intent = Intent(this, Confirm_Activity::class.java)
                                     startActivity(intent)
                                     finish()
+
+
 
                                 } else {
 
@@ -140,6 +168,72 @@ class CartActivity : AppCompatActivity() {
 
                     }
                 queue.add(jsonObjectRequest)
+                }
+                gpay.setOnClickListener {
+
+                    val jsonObjectRequest =
+                        object :
+                            JsonObjectRequest(Request.Method.POST, url, jsonParams, Response.Listener {
+                                try {
+
+                                    val success = it.getJSONObject("data").getBoolean("success")
+
+                                    if (success) {
+                                        startPayment(j)
+
+                                        val intent = Intent(this, Confirm_Activity::class.java)
+                                        startActivity(intent)
+                                        finish()
+
+
+
+                                    } else {
+
+                                        Toast.makeText(
+                                            this,
+                                            "First Add Some Items In Your Cart",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        val intent = Intent(this, DashboardActivity::class.java)
+                                        startActivity(intent)
+                                        finish()
+
+                                    }
+                                } catch (e: JSONException) {
+
+                                    Toast.makeText(
+                                        this,
+                                        "Some unexpected error occurred",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+
+                                }
+
+                            }, Response.ErrorListener {
+
+                                Toast.makeText(
+                                    this,
+                                    "Volley Error Occurred",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+                            }) {
+                            override fun getHeaders(): MutableMap<String, String> {
+                                val headers = HashMap<String, String>()
+                                headers["Content-type"] = "application/json"
+                                headers["token"] = "b239d60302e428"
+
+                                return headers
+                            }
+
+                        }
+                    queue.add(jsonObjectRequest)
+
+
+
+
+
+                }
 
             }
         } else {
@@ -152,7 +246,7 @@ class CartActivity : AppCompatActivity() {
                 this?.finish()
 
 
-            }
+             }
             alert.setNegativeButton("exit") { text, listener ->
                 ActivityCompat.finishAffinity(this)
 
@@ -186,5 +280,51 @@ class CartActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         super.onBackPressed()
         return true
+    }
+     fun startPayment(j:Int) {
+
+        /*
+        *  You need to pass current activity in order to let Razorpay create CheckoutActivity
+        * */
+        val activity: Activity = this
+
+        Checkout().setKeyID("rzp_test_PHpomGQKceY0Ra")
+        try {
+            val options = JSONObject()
+//            options.put("name","Rak12")
+//            options.put("description","Demoing Charges")
+//            //You can omit the image option to fetch the image from dashboard
+//            options.put("image","https://s3.amazonaws.com/rzp-mobile/images/rzp.png")
+            options.put("theme.color", "#3399cc")
+           options.put("currency","INR")
+//            options.put("order_id", "order_DBJOWzybf0sJbb")
+          options.put("amount",j*100)//pass amount in currency subunits
+
+            val prefill = JSONObject()
+            //prefill.put("amount",j)
+            prefill.put("email",sp.getString("email", ""))
+            prefill.put("contact",sp.getString("mobile_number", ""))
+            options.put("prefill",prefill)
+
+            Checkout().open(this,options)
+        }catch (e: Exception){
+            Toast.makeText(activity,"Error in payment: "+ e.message,Toast.LENGTH_LONG).show()
+            e.printStackTrace()
+        }
+    }
+
+    override fun onPaymentSuccess(p0: String?) {
+
+
+//        webView.visibility = View.GONE
+
+//        outerBox?.visibility = View.VISIBLE
+        Toast.makeText(this, "Error",Toast.LENGTH_LONG).show()
+
+    }
+
+    override fun onPaymentError(p0: Int, p1: String?) {
+
+        Toast.makeText(this, "Payment Successful",Toast.LENGTH_LONG).show()
     }
 }
