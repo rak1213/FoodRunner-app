@@ -99,6 +99,11 @@ class DashboardActivity : AppCompatActivity() {
                     supportActionBar?.title = "Feedback Form"
                     dl.closeDrawers()
                 }
+                R.id.getregistered -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.frame,   Getregistered()).commit()
+                    supportActionBar?.title = "Get Registered"
+                    dl.closeDrawers()
+                }
                 R.id.logout -> {
                     val builder = AlertDialog.Builder(this)
                     builder.setTitle("Confirmation")

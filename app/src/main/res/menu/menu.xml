@@ -19,6 +19,9 @@
         <item android:id="@+id/feedback"
             android:title="Feedback"
             android:icon="@drawable/ic_feedback"/>
+        <item android:id="@+id/getregistered"
+            android:title="Get Registered"
+            android:icon="@drawable/ic_registration"/>
         <item android:id="@+id/logout"
             android:title="Log out"
             android:icon="@drawable/ic_logout"/>

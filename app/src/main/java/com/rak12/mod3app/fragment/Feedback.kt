@@ -61,6 +61,8 @@ class Feedback : Fragment() {
         submitButton.setOnClickListener {
             jsonParams.put("feedback",feedbackText.text.toString())
             val jsonObjectRequest = object : JsonObjectRequest(Method.POST,url,jsonParams,Response.Listener {
+                Toast.makeText(activity as Context, "Feedback submitted!", Toast.LENGTH_LONG)
+                    .show()
             },Response.ErrorListener {  }) {
                 override fun getHeaders(): MutableMap<String, String> {
                     val headers = HashMap<String, String>()
