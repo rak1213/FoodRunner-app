@@ -17,11 +17,12 @@ import com.rak12.mod3app.R
 import com.rak12.mod3app.activity.RestaurantDetails
 
 import com.rak12.mod3app.database.*
+import com.rak12.mod3app.model.Names
 import com.rak12.mod3app.model.Restaurant
 import com.squareup.picasso.Picasso
 
 
-class AllrestAdapter(val context: Context, val data: List<Restaurant>) :
+class AllrestAdapter(val context: Context, val data: List<Names>) :
     RecyclerView.Adapter<AllrestAdapter.AllrestadapterViewHolder>() {
     class AllrestadapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val card: CardView = view.findViewById(R.id.cardRestaurant)
@@ -42,7 +43,7 @@ class AllrestAdapter(val context: Context, val data: List<Restaurant>) :
     }
 
     override fun onBindViewHolder(holder: AllrestadapterViewHolder, position: Int) {
-        var info: Restaurant = data[position]
+        var info: Names = data[position]
         holder.restname.text = info.name
         holder.cost.text = "Rs ${info.cost}/person"
         holder.restrating.text = info.rating
