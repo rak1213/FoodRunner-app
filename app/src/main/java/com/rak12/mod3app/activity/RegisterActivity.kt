@@ -49,7 +49,8 @@ class RegisterActivity : AppCompatActivity() {
         register.setOnClickListener {
 
             val queue = Volley.newRequestQueue(this)
-            val url = "http://13.235.250.119/v2/register/fetch_result"
+            val url1 = "http://13.235.250.119/v2/register/fetch_result"
+            val url = "http://375b3326449b.ngrok.io/signup"
             val jsonParams = JSONObject()
             val name = etname.text.toString()
             val mobile = etmobile.text.toString()
@@ -62,18 +63,12 @@ class RegisterActivity : AppCompatActivity() {
             jsonParams.put("email", email)
             jsonParams.put("password", pass)
             if (Validations.validateNameLength(name)) {
-
                 if (Validations.validateEmail(email)) {
-
                     if (Validations.validateMobile(mobile)) {
-
                         if (Validations.validatePasswordLength(pass)) {
-
                             if (Validations.matchPassword(pass, etconpass.text.toString())) {
-
-
                                 if (ConnectionManager().checkconnectivity(this)) {
-                                    val jsonRequest =
+                                    /*val jsonRequest =
                                         object : JsonObjectRequest(
                                             Method.POST,
                                             url,
@@ -141,6 +136,76 @@ class RegisterActivity : AppCompatActivity() {
                                                 headers["Content-Type"] =
                                                     "application/json"
                                                 headers["token"] = "b239d60302e428"
+                                                return headers
+                                            }
+                                        }
+                                    queue.add(jsonRequest)*/
+                                    val jsonRequest =
+                                        object : JsonObjectRequest(
+                                            Method.POST,
+                                            url,
+                                            jsonParams,
+                                            Response.Listener {
+                                                try {
+                                                    val data = it.getJSONObject("data")
+                                                    val success =
+                                                        data.getBoolean("success")
+
+                                                    if (success) {
+
+                                                        val data1 =
+                                                            data.getJSONObject("data")
+                                                        sp.edit().putString(
+                                                            "user_id",
+                                                            data1.getString("_id")
+                                                        ).apply()
+                                                        sp.edit().putString(
+                                                            "name",
+                                                            data1.getString("name")
+                                                        ).apply()
+                                                        sp.edit().putString(
+                                                            "email",
+                                                            data1.getString("email")
+                                                        ).apply()
+                                                        sp.edit().putString(
+                                                            "address",
+                                                            data1.getString("address")
+                                                        ).apply()
+                                                        sp.edit().putString(
+                                                            "mobile_number",
+                                                            data1.getString("mobile_number")
+                                                        ).apply()
+                                                        Toast.makeText(
+                                                            this,
+                                                            "REGISTRATION SUCCESS",
+                                                            Toast.LENGTH_SHORT
+                                                        ).show()
+                                                        val i = Intent(
+                                                            this,
+                                                            DashboardActivity::class.java
+                                                        )
+                                                        startActivity(i)
+                                                        finish()
+                                                    } else {
+                                                        Toast.makeText(
+                                                            this,
+                                                            "SOMETHING WENT WRONG",
+                                                            Toast.LENGTH_SHORT
+                                                        ).show()
+                                                    }
+                                                } catch (e: JSONException) {
+                                                    Toast.makeText(
+                                                        this,
+                                                        "Error1212",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+
+                                                }
+                                            },
+                                            Response.ErrorListener { }) {
+                                            override fun getHeaders(): MutableMap<String, String> {
+                                                val headers = HashMap<String, String>()
+                                                headers["Content-Type"] = "application/json"
                                                 return headers
                                             }
                                         }

@@ -94,6 +94,11 @@ class DashboardActivity : AppCompatActivity() {
                     dl.closeDrawers()
 
                 }
+                R.id.feedback -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.frame, Feedback()).commit()
+                    supportActionBar?.title = "Feedback Form"
+                    dl.closeDrawers()
+                }
                 R.id.logout -> {
                     val builder = AlertDialog.Builder(this)
                     builder.setTitle("Confirmation")

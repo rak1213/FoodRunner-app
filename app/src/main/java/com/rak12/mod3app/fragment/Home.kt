@@ -18,6 +18,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.rak12.mod3app.R
 import com.rak12.mod3app.adapter.AllrestAdapter
+import com.rak12.mod3app.model.Names
 import com.rak12.mod3app.model.Restaurant
 import com.rak12.mod3app.util.ConnectionManager
 
@@ -36,6 +37,7 @@ class Home : Fragment() {
     lateinit var adapter: AllrestAdapter
     lateinit var pl: RelativeLayout
     val restlist = arrayListOf<Restaurant>()
+    val nameList = arrayListOf<Names>()
     private var checkedItem: Int = -1
 
     override fun onCreateView(
@@ -53,11 +55,12 @@ class Home : Fragment() {
 
         layoutManager = LinearLayoutManager(activity)
         pl.visibility = View.VISIBLE
-        val que = Volley.newRequestQueue(activity as Context)
-        val url = "http://13.235.250.119/v2/restaurants/fetch_result"
+        val que = Volley.newRequestQueue(activity as Context)/*
+        val url1 = "http://13.235.250.119/v2/restaurants/fetch_result"*/
+        val url = "http://375b3326449b.ngrok.io/restaurantNames"
         if (ConnectionManager().checkconnectivity(activity as Context)) {
-            val jsonObjectRequest =
-                object : JsonObjectRequest(Method.GET, url, null, Response.Listener {
+            /*val jsonObjectRequest =
+                object : JsonObjectRequest(Method.GET, url1, null, Response.Listener {
                     try {
                         pl.visibility = View.GONE
                         val data = it.getJSONObject("data")
@@ -73,14 +76,9 @@ class Home : Fragment() {
                                     jsonObject.getString("cost_for_one"),
                                     jsonObject.getString("image_url")
                                 )
+                                println(restaurant.img)
                                 restlist.add(restaurant)
-
-
-
-
                                 adapter = AllrestAdapter(activity as Context, restlist)
-
-
                                 rv.adapter = adapter
                                 rv.layoutManager = layoutManager
 
@@ -104,6 +102,33 @@ class Home : Fragment() {
                     }
 
                 }
+            que.add(jsonObjectRequest)*/
+            val jsonObjectRequest = object : JsonObjectRequest(Method.GET,url,null,Response.Listener {
+                pl.visibility = View.GONE
+                val data = it.getJSONArray("data")
+                for (i in 0 until data.length()) {
+                    val jsonObject = data.getJSONObject(i)
+                    val restaurant = Names(
+                        jsonObject.getInt("id"),
+                        jsonObject.getString("name"),
+                        jsonObject.getString("rating"),
+                        jsonObject.getString("cost_for_one"),
+                        jsonObject.getString("image_url")
+                    )
+                    nameList.add(restaurant)
+                    adapter = AllrestAdapter(activity as Context, nameList)
+                    rv.adapter = adapter
+                    rv.layoutManager = layoutManager
+                }
+            },
+                Response.ErrorListener {  }){
+                override fun getHeaders(): MutableMap<String, String> {
+                    val headers = HashMap<String, String>()
+                    headers["Content-type"] = "application/json"
+                    return headers
+                }
+
+            }
             que.add(jsonObjectRequest)
         } else {
             val alert = AlertDialog.Builder(activity as Context)

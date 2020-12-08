@@ -86,6 +86,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:+'
     implementation 'androidx.constraintlayout:constraintlayout:+'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testImplementation 'androidx.test.ext:junit:1.1.1'
     implementation 'android.arch.core:core-testing:1.1.1'
 }

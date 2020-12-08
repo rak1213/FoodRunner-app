@@ -69,7 +69,8 @@ class LoginActivity : AppCompatActivity() {
             );
 
             val queue = Volley.newRequestQueue(this)
-            val url = "http://13.235.250.119/v2/login/fetch_result"
+                val url1 = "http://13.235.250.119/v2/login/fetch_result"
+            val url = "http://375b3326449b.ngrok.io/login"
             val jsonParams = JSONObject()
             val mobile = etmobile.text.toString()
             val pass = etpass.text.toString()
@@ -78,9 +79,9 @@ class LoginActivity : AppCompatActivity() {
             if (Validations.validateMobile(mobile)) {
                 if (Validations.validatePasswordLength(pass)) {
                     if (ConnectionManager().checkconnectivity(this)) {
-                        val jsonRequest =
+                        /*val jsonRequest =
                             object : JsonObjectRequest(
-                                Method.POST, url, jsonParams, Response.Listener {
+                                Method.POST, url1, jsonParams, Response.Listener {
                                     try {
                                         val data = it.getJSONObject("data")
                                         val success = data.getBoolean("success")
@@ -130,6 +131,64 @@ class LoginActivity : AppCompatActivity() {
                                     val headers = HashMap<String, String>()
                                     headers["Content-Type"] = "application/json"
                                     headers["token"] = "b239d60302e428"
+                                    return headers
+                                }
+
+
+                            }
+                        queue.add(jsonRequest)*/
+                        val jsonRequest =
+                            object : JsonObjectRequest(
+                                Method.POST, url, jsonParams, Response.Listener {
+                                    try {
+                                        println(it)
+                                        val data = it.getJSONObject("data")
+                                        val success = data.getBoolean("success")
+
+                                        if (success) {
+
+                                            val data1 = data.getJSONObject("data")
+                                            sp.edit()
+                                                .putString("user_id", data1.getString("_id"))
+                                                .apply()
+                                            sp.edit().putString("name", data1.getString("name"))
+                                                .apply()
+                                            sp.edit().putString("email", data1.getString("email"))
+                                                .apply()
+                                            sp.edit()
+                                                .putString("address", data1.getString("address"))
+                                                .apply()
+                                            sp.edit().putString(
+                                                "mobile_number",
+                                                data1.getString("mobile_number")
+                                            ).apply()
+                                            saveprefrences()
+                                            val i = Intent(this, DashboardActivity::class.java)
+                                            startActivity(i)
+                                            finish()
+                                        } else {
+                                            Toast.makeText(
+                                                this,
+                                                "Wrong Login Credentials",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                    } catch (e: JSONException) {
+                                        Toast.makeText(this, "Error1212", Toast.LENGTH_SHORT).show()
+
+                                    }
+                                },
+                                Response.ErrorListener {
+                                    Toast.makeText(
+                                        this,
+                                        "Volley Error",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            ) {
+                                override fun getHeaders(): MutableMap<String, String> {
+                                    val headers = HashMap<String, String>()
+                                    headers["Content-Type"] = "application/json"
                                     return headers
                                 }
 
