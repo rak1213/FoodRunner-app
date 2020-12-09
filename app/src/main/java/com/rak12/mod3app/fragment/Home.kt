@@ -57,7 +57,7 @@ class Home : Fragment() {
         pl.visibility = View.VISIBLE
         val que = Volley.newRequestQueue(activity as Context)/*
         val url1 = "http://13.235.250.119/v2/restaurants/fetch_result"*/
-        val url = "http://375b3326449b.ngrok.io/restaurantNames"
+        val url = "http://dc557a898ad7.ngrok.io/restaurantNames"
         if (ConnectionManager().checkconnectivity(activity as Context)) {
             /*val jsonObjectRequest =
                 object : JsonObjectRequest(Method.GET, url1, null, Response.Listener {
@@ -177,15 +177,15 @@ class Home : Fragment() {
 
             when (checkedItem) {
                 0 -> {
-                    Collections.sort(restlist, Sorter.costComparator)
+                    Collections.sort(nameList, Sorter.costComparator)
                 }
                 1 -> {
-                    Collections.sort(restlist, Sorter.costComparator)
-                    restlist.reverse()
+                    Collections.sort(nameList, Sorter.costComparator)
+                    nameList.reverse()
                 }
                 2 -> {
-                    Collections.sort(restlist, Sorter.ratingComparator)
-                    restlist.reverse()
+                    Collections.sort(nameList, Sorter.ratingComparator)
+                    nameList.reverse()
                 }
             }
             adapter.notifyDataSetChanged()
