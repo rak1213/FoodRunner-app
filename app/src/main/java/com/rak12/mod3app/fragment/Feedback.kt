@@ -10,13 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.rak12.mod3app.R
 import com.rak12.mod3app.activity.Confirm_Activity
 import com.rak12.mod3app.activity.DashboardActivity
+import com.rak12.mod3app.adapter.AllrestAdapter
+import com.rak12.mod3app.adapter.FeedbackRecyclerAdapter
 import com.rak12.mod3app.model.Restaurant
 import org.json.JSONException
 import org.json.JSONObject
@@ -27,6 +32,10 @@ class Feedback : Fragment() {
 
     lateinit var submitButton : Button
     lateinit var feedbackText : EditText
+    lateinit var feedbackRecycler : RecyclerView
+    lateinit var layoutManager : RecyclerView.LayoutManager
+    lateinit var adapter : FeedbackRecyclerAdapter
+    lateinit var previousFeedback : TextView
     lateinit var sp: SharedPreferences
     val feedbacks = arrayListOf<String>()
     override fun onCreateView(
@@ -34,19 +43,31 @@ class Feedback : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_feedback, container, false)
+        feedbackRecycler = view.findViewById(R.id.feedbackRecycler)
         feedbackText = view.findViewById(R.id.feedbackText)
         submitButton = view.findViewById(R.id.submitFeedback)
-        sp = context!!.getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE)
+        previousFeedback = view.findViewById(R.id.previousFeedback)
+        previousFeedback.visibility = View.GONE
+        sp = requireContext().getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE)
+        layoutManager = LinearLayoutManager(activity)
         val queue = Volley.newRequestQueue(context)
-        val url = "http://5671486f8443.ngrok.io/feedback"
+        val url = "http://dc557a898ad7.ngrok.io/feedback"
         val jsonParams = JSONObject()
         val userName = sp.getString("name", null).toString()
         val jsonObjectRequest = object : JsonObjectRequest(Method.GET,url,null,Response.Listener {
             val data = it.getJSONArray("data")
-            for (i in 0 until data.length()) {
-                val jsonObject = data.getJSONObject(i)
-                val feedback = jsonObject.getString("feedback")
-                feedbacks.add(feedback)
+            if(data.length()!=0)
+            {
+                previousFeedback.visibility = View.VISIBLE
+                for (i in 0 until data.length()) {
+                    val jsonObject = data.getJSONObject(i)
+                    println(jsonObject)
+                    val feedback = jsonObject.getString("feedback")
+                    feedbacks.add(feedback)
+                }
+                adapter = FeedbackRecyclerAdapter(activity as Context, feedbacks)
+                feedbackRecycler.adapter = adapter
+                feedbackRecycler.layoutManager = layoutManager
             }
         },Response.ErrorListener {
         }) {
@@ -59,20 +80,34 @@ class Feedback : Fragment() {
         }
         queue.add(jsonObjectRequest)
         submitButton.setOnClickListener {
-            jsonParams.put("feedback",feedbackText.text.toString())
-            val jsonObjectRequest = object : JsonObjectRequest(Method.POST,url,jsonParams,Response.Listener {
-                Toast.makeText(activity as Context, "Feedback submitted!", Toast.LENGTH_LONG)
-                    .show()
-            },Response.ErrorListener {  }) {
-                override fun getHeaders(): MutableMap<String, String> {
-                    val headers = HashMap<String, String>()
-                    headers["Content-type"] = "application/json"
-                    headers["user"] = userName
-                    return headers
+            if(feedbackText.text.isNotEmpty())
+            {
+                jsonParams.put("feedback",feedbackText.text.toString())
+                val jObjectRequest = object : JsonObjectRequest(Method.POST,url,jsonParams,Response.Listener {
+                    val data = it.getJSONObject("data")
+                    val success = data.getBoolean("success")
+                    if(success)
+                    {
+                        feedbackText.setText("")
+                        println(it)
+                        Toast.makeText(context,"Feedback Submitted Successfully",Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        Toast.makeText(context,"Something Went Wrong",Toast.LENGTH_SHORT).show()
+                    }
+                },Response.ErrorListener {  }) {
+                    override fun getHeaders(): MutableMap<String, String> {
+                        val headers = HashMap<String, String>()
+                        headers["Content-type"] = "application/json"
+                        headers["user"] = userName
+                        return headers
+                    }
                 }
+                queue.add(jObjectRequest)
             }
-            queue.add(jsonObjectRequest)
-            feedbackText.setText("")
+            else{
+                Toast.makeText(context,"Feedback Field is left blank",Toast.LENGTH_SHORT).show()
+            }
             feedbackText.clearFocus()
         }
         return view

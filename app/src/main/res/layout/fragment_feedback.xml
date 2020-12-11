@@ -1,51 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.Feedback">
-
-    <ImageView
-        android:id="@+id/applogo"
-        android:layout_width="match_parent"
-        android:layout_height="182dp"
-        android:layout_gravity="center_horizontal"
-        android:padding="10dp"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/applogo" />
-
-    <EditText
-        android:id="@+id/feedbackText"
+    android:layout_height="match_parent">
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="20dp"
-        android:layout_below="@id/applogo"
-        android:background="@drawable/text_background"
-        android:drawableStart="@drawable/ic_feedback"
-        android:drawablePadding="10dp"
-        android:hint="@string/feedback"
-        android:inputType="text"
-        android:padding="15dp"
-        android:minLines="5"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:scrollbars="vertical"
-        android:textColor="@color/black"/>
+        tools:context=".fragment.Feedback">
 
-    <Button
-        android:id="@+id/submitFeedback"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/feedbackText"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="20dp"
-        android:background="#DF0101"
-        android:text="@string/submit_feedback"
-        android:textAllCaps="false"
-        android:textColor="#fff"
-        android:textSize="20sp" />
+        <ImageView
+            android:id="@+id/applogo"
+            android:layout_width="match_parent"
+            android:layout_height="182dp"
+            android:layout_gravity="center_horizontal"
+            android:padding="10dp"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/applogo" />
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/feedbackText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="20dp"
+            android:layout_below="@id/applogo"
+            android:background="@drawable/text_background"
+            android:drawableStart="@drawable/ic_feedback"
+            android:drawablePadding="10dp"
+            android:hint="@string/feedback"
+            android:inputType="text"
+            android:padding="15dp"
+            android:minLines="5"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbars="vertical"
+            android:textColor="@color/black"/>
+
+        <Button
+            android:id="@+id/submitFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/feedbackText"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="20dp"
+            android:background="#DF0101"
+            android:text="@string/submit_feedback"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/previousFeedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Previous Feedbacks"
+            android:textSize="22sp"
+            android:layout_below="@id/submitFeedback"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/feedbackRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/submitFeedback"
+            android:layout_marginTop="150dp"
+            android:layout_marginBottom="50dp"
+            android:padding="10dp" />
+
+    </RelativeLayout>
+</ScrollView>

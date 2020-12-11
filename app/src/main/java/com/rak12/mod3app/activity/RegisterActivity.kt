@@ -50,7 +50,7 @@ class RegisterActivity : AppCompatActivity() {
 
             val queue = Volley.newRequestQueue(this)
             val url1 = "http://13.235.250.119/v2/register/fetch_result"
-            val url = "http://375b3326449b.ngrok.io/signup"
+            val url = "http://dc557a898ad7.ngrok.io/signup"
             val jsonParams = JSONObject()
             val name = etname.text.toString()
             val mobile = etmobile.text.toString()
@@ -175,6 +175,7 @@ class RegisterActivity : AppCompatActivity() {
                                                             "mobile_number",
                                                             data1.getString("mobile_number")
                                                         ).apply()
+                                                        saveprefrences()
                                                         Toast.makeText(
                                                             this,
                                                             "REGISTRATION SUCCESS",
@@ -250,6 +251,10 @@ class RegisterActivity : AppCompatActivity() {
                 etname.error = "Name should be of atleast 3 characters"
             }
         }
+    }
+
+    fun saveprefrences() {
+        sp.edit().putBoolean("Isloggedin", true).apply()
     }
 
 }

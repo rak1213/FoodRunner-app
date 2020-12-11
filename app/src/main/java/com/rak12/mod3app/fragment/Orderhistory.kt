@@ -46,7 +46,7 @@ class Orderhistory : Fragment() {
             getString(R.string.preference_file),
             Context.MODE_PRIVATE
         )
-        val userId = sp.getString("user_id", null)
+        val userId = sp.getString("user_id", null).toString()
         layoutManager = LinearLayoutManager(activity)
         pl.visibility = View.VISIBLE
         var orderHistoryList = ArrayList<Orderhistorydetails>()
@@ -54,7 +54,8 @@ class Orderhistory : Fragment() {
 
         val queue = Volley.newRequestQueue(activity as Context)
 
-        val url = "http://13.235.250.119/v2/orders/fetch_result/$userId"
+        /*val url = "http://13.235.250.119/v2/orders/fetch_result/$userId"*/
+        val url = "http://dc557a898ad7.ngrok.io/order"
 
 
         if (ConnectionManager().checkconnectivity(activity as Context)) {
@@ -116,7 +117,7 @@ class Orderhistory : Fragment() {
                     override fun getHeaders(): MutableMap<String, String> {
                         val headers = HashMap<String, String>()
                         headers["Content-type"] = "application/json"
-                        headers["token"] = "8cac724ac3760c"
+                        headers["user_id"] = userId
 
                         return headers
                     }
