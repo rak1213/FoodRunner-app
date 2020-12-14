@@ -35,16 +35,16 @@ class OtpVerificationActivity : AppCompatActivity() {
         etConfirmNewPassword = findViewById(R.id.etConfirmNewPassword)
         btnSubmit = findViewById(R.id.btnSubmit)
         sp = getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE)
-        val mobile = intent.getStringExtra("mobile_number")
+        val number = intent.getStringExtra("mobile_number")
         btnSubmit.setOnClickListener {
             val queue = Volley.newRequestQueue(this)
-            val url = "http://13.235.250.119/v2/reset_password/fetch_result"
+            /*val url = "http://13.235.250.119/v2/reset_password/fetch_result"*/
+            val url = "http://c38be6ca55f9.ngrok.io/reset_password"
             val jsonParams = JSONObject()
-
             val otp = etOtp.text.toString()
             val pass = etNewPassword.text.toString()
             val conpass = etConfirmNewPassword.text.toString()
-            jsonParams.put("mobile_number", mobile)
+            jsonParams.put("mobile_number", number)
             jsonParams.put("password", pass)
             jsonParams.put("otp", otp)
             if (otp != null) {
@@ -65,9 +65,10 @@ class OtpVerificationActivity : AppCompatActivity() {
                                             startActivity(i)
                                             finish()
                                         } else {
+                                            val msg = data.getString("errMessage")
                                             Toast.makeText(
                                                 this,
-                                                "Wrong Login Credentials",
+                                                msg,
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                         }

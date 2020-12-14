@@ -1,3 +1,4 @@
+
 package com.rak12.mod3app.activity
 
 import android.app.AlertDialog
@@ -31,7 +32,8 @@ class ForgetPassActivity : AppCompatActivity() {
         next = findViewById(R.id.next)
         next.setOnClickListener {
             val queue = Volley.newRequestQueue(this)
-            val url = "http://13.235.250.119/v2/forgot_password/fetch_result"
+            /*val url = "http://13.235.250.119/v2/forgot_password/fetch_result"*/
+            val url = "http://c38be6ca55f9.ngrok.io/forgot"
             val jsonParams = JSONObject()
             val mobile = etmobile.text.toString()
             val email = etemail.text.toString()
