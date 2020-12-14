@@ -54,8 +54,8 @@ class Orderhistory : Fragment() {
 
         val queue = Volley.newRequestQueue(activity as Context)
 
-        /*val url = "http://13.235.250.119/v2/orders/fetch_result/$userId"*/
-        val url = "http://dc557a898ad7.ngrok.io/order"
+        val url = "http://13.235.250.119/v2/orders/fetch_result/$userId"
+        /*val url = "http://c38be6ca55f9.ngrok.io/order"*/
 
 
         if (ConnectionManager().checkconnectivity(activity as Context)) {
