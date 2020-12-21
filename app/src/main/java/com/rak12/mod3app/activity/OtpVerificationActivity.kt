@@ -39,7 +39,7 @@ class OtpVerificationActivity : AppCompatActivity() {
         btnSubmit.setOnClickListener {
             val queue = Volley.newRequestQueue(this)
             /*val url = "http://13.235.250.119/v2/reset_password/fetch_result"*/
-            val url = "http://c38be6ca55f9.ngrok.io/reset_password"
+            val url = "https://young-stream-54945.herokuapp.com/reset_password"
             val jsonParams = JSONObject()
             val otp = etOtp.text.toString()
             val pass = etNewPassword.text.toString()

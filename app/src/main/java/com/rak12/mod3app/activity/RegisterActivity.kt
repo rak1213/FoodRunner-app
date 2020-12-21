@@ -50,7 +50,7 @@ class RegisterActivity : AppCompatActivity() {
 
             val queue = Volley.newRequestQueue(this)
             val url1 = "http://13.235.250.119/v2/register/fetch_result"
-            val url = "http://c38be6ca55f9.ngrok.io/signup"
+            val url = "https://young-stream-54945.herokuapp.com/signup"
             val jsonParams = JSONObject()
             val name = etname.text.toString()
             val mobile = etmobile.text.toString()

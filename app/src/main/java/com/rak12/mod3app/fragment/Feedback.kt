@@ -1,7 +1,6 @@
-package com.rak12.mod3app.fragment
+    package com.rak12.mod3app.fragment
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -18,14 +17,8 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.rak12.mod3app.R
-import com.rak12.mod3app.activity.Confirm_Activity
-import com.rak12.mod3app.activity.DashboardActivity
-import com.rak12.mod3app.adapter.AllrestAdapter
 import com.rak12.mod3app.adapter.FeedbackRecyclerAdapter
-import com.rak12.mod3app.model.Restaurant
-import org.json.JSONException
 import org.json.JSONObject
-import org.junit.runner.Request
 
 
 class Feedback : Fragment() {
@@ -51,9 +44,9 @@ class Feedback : Fragment() {
         sp = requireContext().getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE)
         layoutManager = LinearLayoutManager(activity)
         val queue = Volley.newRequestQueue(context)
-        val url = "http://dc557a898ad7.ngrok.io/feedback"
+        val url = "https://young-stream-54945.herokuapp.com/feedback"
         val jsonParams = JSONObject()
-        val userName = sp.getString("name", null).toString()
+        val userId = sp.getString("user_id", null).toString()
         val jsonObjectRequest = object : JsonObjectRequest(Method.GET,url,null,Response.Listener {
             val data = it.getJSONArray("data")
             if(data.length()!=0)
@@ -74,7 +67,7 @@ class Feedback : Fragment() {
             override fun getHeaders(): MutableMap<String, String> {
                 val headers = HashMap<String, String>()
                 headers["Content-type"] = "application/json"
-                headers["user"] = userName
+                headers["user_id"] = userId
                 return headers
             }
         }
@@ -99,7 +92,7 @@ class Feedback : Fragment() {
                     override fun getHeaders(): MutableMap<String, String> {
                         val headers = HashMap<String, String>()
                         headers["Content-type"] = "application/json"
-                        headers["user"] = userName
+                        headers["user_id"] = userId
                         return headers
                     }
                 }

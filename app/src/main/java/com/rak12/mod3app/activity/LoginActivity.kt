@@ -70,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
 
             val queue = Volley.newRequestQueue(this)
             /*val url1 = "http://13.235.250.119/v2/login/fetch_result"*/
-            val url = "http://c38be6ca55f9.ngrok.io/login"
+            val url = "https://young-stream-54945.herokuapp.com/login"
             val jsonParams = JSONObject()
             val mobile = etmobile.text.toString()
             val pass = etpass.text.toString()

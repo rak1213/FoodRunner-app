@@ -57,7 +57,7 @@ class Home : Fragment() {
         pl.visibility = View.VISIBLE
         val que = Volley.newRequestQueue(activity as Context)/*
         val url1 = "http://13.235.250.119/v2/restaurants/fetch_result"*/
-        val url = "http://c38be6ca55f9.ngrok.io/restaurantNames"
+        val url = "https://young-stream-54945.herokuapp.com/restaurantNames"
         if (ConnectionManager().checkconnectivity(activity as Context)) {
             /*val jsonObjectRequest =
                 object : JsonObjectRequest(Method.GET, url1, null, Response.Listener {
