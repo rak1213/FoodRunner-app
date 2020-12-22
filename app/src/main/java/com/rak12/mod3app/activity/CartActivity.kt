@@ -97,7 +97,7 @@ class CartActivity : AppCompatActivity() , PaymentResultListener {
 
         val jsonParams = JSONObject()
         jsonParams.put("user_id", userId)
-        jsonParams.put("restaurant_id", resId.toString())
+        jsonParams.put("restaurant_name", txtResName.text.toString())
         jsonParams.put("total_cost", j.toString())
         jsonParams.put("food", foodItemsArray)
         println(jsonParams)

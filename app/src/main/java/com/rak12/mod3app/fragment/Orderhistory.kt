@@ -78,12 +78,10 @@ class Orderhistory : Fragment() {
                                 for (i in 0 until ordersArray.length()) {
                                     pl.visibility = View.GONE
                                     var order1 = ordersArray.getJSONObject(i)
-                                    var fooditems = order1.getJSONArray("food_items")
+                                    var fooditems = order1.getJSONArray("foodsOrdered")
 
                                     var entry = Orderhistorydetails(
-                                        order1.getString("order_id"),
-                                        order1.getString("restaurant_name"),
-                                        order1.getString("total_cost"),
+                                        order1.getString("res_name"),
                                         order1.getString("order_placed_at"),
                                         fooditems
                                     )
