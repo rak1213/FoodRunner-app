@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="330dp">
 
     <TextView
         android:id="@+id/textView"
@@ -27,14 +27,20 @@
       android:layout_marginLeft="20dp"
       android:layout_marginTop="20dp"
       android:padding="5dp"/>
-    <ImageView
-        android:id="@+id/gpay"
-
+    <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
-        android:layout_height="110dp"
-        android:src="@drawable/gpay"
-        android:layout_below="@+id/cod"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cod"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="10dp"
+        app:cardCornerRadius="10dp"
+        android:background="@drawable/text_background">
+        <ImageView
+            android:id="@+id/gpay"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:src="@drawable/razorpay"
+            />
+    </androidx.cardview.widget.CardView>
 
-        android:layout_marginTop="20dp"
-        />
     </RelativeLayout>
