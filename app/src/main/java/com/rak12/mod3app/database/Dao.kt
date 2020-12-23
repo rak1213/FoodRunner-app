@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 
 @Dao
-public interface Dao {
+interface Dao {
     @Insert
     fun insert(restaurantEntity: RestaurantEntity)
 
@@ -20,7 +20,7 @@ public interface Dao {
     fun getbyid(id: Int): RestaurantEntity
 
     @Insert
-    public fun insertfooditem(cartEntity: CartEntity)
+    fun insertfooditem(cartEntity: CartEntity)
 
     @Delete
     fun deletefooditem(cartEntity: CartEntity)
@@ -29,7 +29,7 @@ public interface Dao {
     fun getallfooditem(): List<CartEntity>
 
     @Query("SELECT * FROM cartorders WHERE foodid=:foodid ")
-    public fun getbyid2(foodid: String): CartEntity
+    fun getbyid2(foodid: String): CartEntity
 
 
     @Query("DELETE FROM cartorders;")

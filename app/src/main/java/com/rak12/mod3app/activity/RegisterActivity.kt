@@ -219,7 +219,7 @@ class RegisterActivity : AppCompatActivity() {
                                     alert.setPositiveButton("open settings") { text, listener ->
                                         val i = Intent(Settings.ACTION_WIFI_SETTINGS)
                                         startActivity(i)
-                                        this?.finish()
+                                        this.finish()
 
 
                                     }

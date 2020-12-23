@@ -60,13 +60,13 @@ class LoginActivity : AppCompatActivity() {
                 R.id.pass,
                 "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$",
                 R.string.passworderror
-            );
+            )
             awesomeValidation.addValidation(
                 this,
                 R.id.mobile,
                 "^[2-9]{2}[0-9]{8}$",
                 R.string.mobilerror
-            );
+            )
 
             val queue = Volley.newRequestQueue(this)
             /*val url1 = "http://13.235.250.119/v2/login/fetch_result"*/
@@ -202,7 +202,7 @@ class LoginActivity : AppCompatActivity() {
                         alert.setPositiveButton("open settings") { text, listener ->
                             val i = Intent(Settings.ACTION_WIFI_SETTINGS)
                             startActivity(i)
-                            this?.finish()
+                            this.finish()
 
 
                         }

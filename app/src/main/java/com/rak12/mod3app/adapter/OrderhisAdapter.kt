@@ -1,14 +1,17 @@
 package com.rak12.mod3app.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rak12.mod3app.R
+import com.rak12.mod3app.activity.TrackOrderActivity
 import com.rak12.mod3app.model.Fooditems
 import com.rak12.mod3app.model.Orderhistorydetails
 import java.text.SimpleDateFormat
@@ -23,6 +26,7 @@ class OrderhisAdapter(val context: Context, val orderhistorylist: ArrayList<Orde
         val reshisresname: TextView = view.findViewById(R.id.txtreshistoryresname)
         val date: TextView = view.findViewById(R.id.txtdate)
         val itemsdisplayrecycler: RecyclerView = view.findViewById(R.id.recyclerhistory)
+        val trackorder:Button=view.findViewById(R.id.trackorder)
 
     }
 
@@ -41,6 +45,10 @@ class OrderhisAdapter(val context: Context, val orderhistorylist: ArrayList<Orde
         var info: Orderhistorydetails = orderhistorylist[position]
         holder.reshisresname.text = info.resname
         holder.date.text = extractdate(info.date)
+        holder.trackorder.setOnClickListener{
+            val i=Intent(context,TrackOrderActivity::class.java)
+            context.startActivity(i)
+        }
         val fooditemslist = ArrayList<Fooditems>()
         for (i in 0 until info.fooditems.length()) {
             var item = info.fooditems.getJSONObject(i)

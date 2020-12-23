@@ -39,8 +39,8 @@ class Confirm_Activity : AppCompatActivity() {
         trackButton.setOnClickListener {
             var checkdeleted = DeleteAll(this).execute().get()
             if (checkdeleted) {
-                var intent = Intent(this,TrackOrderActivity::class.java);
-                startActivity(intent);
+                var intent = Intent(this,TrackOrderActivity::class.java)
+                startActivity(intent)
                 finish()
             } else {
                 Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show()

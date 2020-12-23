@@ -32,12 +32,17 @@
             android:textColor="@android:color/black"
             android:textSize="14sp" />
     </LinearLayout>
-
+<Button
+    android:id="@+id/trackorder"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/linearlayout"
+    android:text="TRACK ORDER"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerhistory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearlayout"
+        android:layout_below="@id/trackorder"
         android:padding="5dp">
 
     </androidx.recyclerview.widget.RecyclerView>

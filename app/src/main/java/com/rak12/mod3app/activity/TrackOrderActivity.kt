@@ -290,7 +290,7 @@ class TrackOrderActivity : AppCompatActivity(), OnMapReadyCallback {
                     likelyPlaceAddresses = arrayOfNulls(count)
                     likelyPlaceAttributions = arrayOfNulls<List<*>?>(count)
                     likelyPlaceLatLngs = arrayOfNulls(count)
-                    for (placeLikelihood in likelyPlaces?.placeLikelihoods ?: emptyList()) {
+                    for (placeLikelihood in likelyPlaces.placeLikelihoods ?: emptyList()) {
                         // Build a list of likely places to show the user.
                         likelyPlaceNames[i] = placeLikelihood.place.name
                         likelyPlaceAddresses[i] = placeLikelihood.place.address
