@@ -14,6 +14,7 @@ import com.rak12.mod3app.database.MIGRATION_1_2
 
 class Confirm_Activity : AppCompatActivity() {
     lateinit var okButton: Button
+    lateinit var trackButton: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,6 +22,7 @@ class Confirm_Activity : AppCompatActivity() {
         setContentView(R.layout.activity_confirm_)
 
         okButton = findViewById(R.id.btnOk)
+        trackButton = findViewById(R.id.btnTrack)
 
         okButton.setOnClickListener {
             var checkdeleted = DeleteAll(this).execute().get()
@@ -33,8 +35,16 @@ class Confirm_Activity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show()
             }
-
-
+        }
+        trackButton.setOnClickListener {
+            var checkdeleted = DeleteAll(this).execute().get()
+            if (checkdeleted) {
+                var intent = Intent(this,TrackOrderActivity::class.java);
+                startActivity(intent);
+                finish()
+            } else {
+                Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show()
+            }
         }
 
     }

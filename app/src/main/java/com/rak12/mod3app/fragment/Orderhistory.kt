@@ -54,8 +54,8 @@ class Orderhistory : Fragment() {
 
         val queue = Volley.newRequestQueue(activity as Context)
 
-        val url = "http://13.235.250.119/v2/orders/fetch_result/$userId"
-        /*val url = "http://c38be6ca55f9.ngrok.io/order"*/
+        /*val url = "http://13.235.250.119/v2/orders/fetch_result/$userId"*/
+        val url = "https://young-stream-54945.herokuapp.com/order"
 
 
         if (ConnectionManager().checkconnectivity(activity as Context)) {
@@ -78,12 +78,10 @@ class Orderhistory : Fragment() {
                                 for (i in 0 until ordersArray.length()) {
                                     pl.visibility = View.GONE
                                     var order1 = ordersArray.getJSONObject(i)
-                                    var fooditems = order1.getJSONArray("food_items")
+                                    var fooditems = order1.getJSONArray("foodsOrdered")
 
                                     var entry = Orderhistorydetails(
-                                        order1.getString("order_id"),
-                                        order1.getString("restaurant_name"),
-                                        order1.getString("total_cost"),
+                                        order1.getString("res_name"),
                                         order1.getString("order_placed_at"),
                                         fooditems
                                     )

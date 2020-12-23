@@ -78,7 +78,8 @@ class CartActivity : AppCompatActivity() , PaymentResultListener {
         for (i in 0 until display.size) {
             j = j + (display[i].price.toInt())
             val obj = JSONObject()
-            obj.put("food_item_id", display[i].foodid.toString())
+            obj.put("food_item_name", display[i].foodname.toString())
+            obj.put("food_item_price",display[i].price.toString())
             foodItemsArray.put(obj)
 
         }
@@ -91,11 +92,12 @@ class CartActivity : AppCompatActivity() , PaymentResultListener {
         val queue = Volley.newRequestQueue(this)
         val userId = sp.getString("user_id", "")
         val resId = sp.getInt("rid", 1000)
-        val url = "http://13.235.250.119/v2/place_order/fetch_result/"
+        val url1 = "http://13.235.250.119/v2/place_order/fetch_result/"
+        val url = "https://young-stream-54945.herokuapp.com/order"
 
         val jsonParams = JSONObject()
         jsonParams.put("user_id", userId)
-        jsonParams.put("restaurant_id", resId.toString())
+        jsonParams.put("restaurant_name", txtResName.text.toString())
         jsonParams.put("total_cost", j.toString())
         jsonParams.put("food", foodItemsArray)
         println(jsonParams)

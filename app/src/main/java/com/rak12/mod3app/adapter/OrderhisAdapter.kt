@@ -45,9 +45,8 @@ class OrderhisAdapter(val context: Context, val orderhistorylist: ArrayList<Orde
         for (i in 0 until info.fooditems.length()) {
             var item = info.fooditems.getJSONObject(i)
             var fooditem = Fooditems(
-                item.getString("food_item_id"),
-                item.getString("name"),
-                item.getString("cost")
+                item.getString("foodName"),
+                item.getString("foodPrice")
 
             )
             fooditemslist.add(fooditem)

@@ -18,6 +18,7 @@
     <string name="ordering_from">Ordering From :</string>
     <string name="your_order_has_been_successfully_placed">Your order has been successfully placed</string>
     <string name="ok">OK</string>
+    <string name="track">Track Order</string>
     <string name="your_favourites_list_is_empty">YOUR FAVOURITES LIST IS EMPTY</string>
     <string name="previous_orders">PREVIOUS ORDERS :-</string>
     <string name="no_orders_currently">NO ORDERS CURRENTLY</string>
@@ -32,4 +33,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="submit_feedback">Submit Feedback</string>
     <string name="feedback">Feedback</string>
+    <string name="maps_api_key">AIzaSyBXHZcOy-cEQlLefSBp1uO7mS1kCPii9l0</string>
 </resources>
