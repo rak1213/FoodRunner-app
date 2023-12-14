@@ -20,6 +20,13 @@ A clone of Zomato integrated with Razorpay for seamless payment transactions. Th
 
 <img src="./images/erd.jpg" alt="ER Diagram" width="400"/>
 
+### Database Collections
+
+- **Credentials Schema:** User identification and contact information.
+- **Restaurant Schema:** Restaurant details and menu items.
+- **Order Schema:** Order details including user and restaurant identifiers, food items, and transaction ID.
+- **Feedback Schema:** User feedback for services and restaurants.
+
 ## App Interface Screenshots
 
 <table>
